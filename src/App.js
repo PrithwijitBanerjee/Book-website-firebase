@@ -1,23 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import { getDatabase, ref, set } from "firebase/database";
+import { app } from "./firebase";
 
 function App() {
+  // Initialize Realtime Database and get a reference to the service
+const db = getDatabase(app);
+const putData = () => {
+  set(ref(db, 'users/john'), {
+    username: 'Prithwijit Banerjee',
+    email: 'prithwijit98@gmail.com',
+    gender: 'male',
+    age: 26,
+    countryOfOrigin: 'India'
+  });
+}
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h2>Firebase-React Project</h2>
+      <button onClick={putData}>Post and Put Data in Firebase DB</button>
     </div>
   );
 }
